@@ -33,12 +33,76 @@
             border-radius:15px;
             box-shadow:0 2px 10px rgba(0,0,0,0.08);
         }
+        .navbar{
+    background:linear-gradient(
+        90deg,
+        #1f8f5f,
+        #111
+    );
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    background:white;
+    color:#1f8f5f;
+    transform:translateY(-2px);
+}
 
     </style>
 </head>
 
 <body>
+<div class="navbar">
 
+    <div class="logo">
+        ♻️ SwapKart
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/home/">🏠 Home</a>
+
+        <a href="/products/">🛍 Products</a>
+
+        <a href="/add-product/">➕ Add Product</a>
+
+        <a href="/cart/">🛒 Cart</a>
+
+        <a href="/my-orders/">📦 Orders</a>
+
+        <a href="/my-uploads/">📤 Uploads</a>
+
+        <a href="/logout/">🚪 Logout</a>
+
+    </div>
+
+</div>
 <h1>🔄 Exchange Center</h1>
 
 <div class="section">
@@ -49,12 +113,28 @@
 
     <div class="card">
 
-        <p><b>Product:</b> {{ req.product.title }}</p>
+        <p><b>Product Wanted:</b> {{ req.product.title }}</p>
 
-        <p><b>From:</b> {{ req.requester.username }}</p>
+<p><b>Requested By:</b> {{ req.requester.username }}</p>
 
-        <p><b>Message:</b> {{ req.message }}</p>
-        <p>
+<p><b>Phone Number:</b> {{ req.phone }}</p>
+
+<p><b>Offered Product:</b> {{ req.offered_product }}</p>
+
+<p><b>Condition:</b> {{ req.condition }}</p>
+
+<p><b>Message:</b> {{ req.message }}</p>
+
+{% if req.exchange_image %}
+
+<img src="{{ req.exchange_image.url }}"
+     style="
+     width:250px;
+     border-radius:12px;
+     margin-top:10px;
+     ">
+
+{% endif %}
 
 <b>Status:</b>
 

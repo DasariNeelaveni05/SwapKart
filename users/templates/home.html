@@ -25,13 +25,45 @@
         }
 
         .navbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:18px 60px;
-            background:white;
-            box-shadow:0 2px 10px rgba(0,0,0,0.05);
-        }
+    background:linear-gradient(
+        90deg,
+        #1f8f5f,
+        #111
+    );
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    background:white;
+    color:#1f8f5f;
+    transform:translateY(-2px);
+}
 
         .dark-mode .navbar{
             background:#1b1b1b;
@@ -334,8 +366,6 @@
     </div>
 
     <div class="nav-links">
-
-        <a href="/home/">🏠 Home</a>
 
         <a href="/products/">🛍 Products</a>
 

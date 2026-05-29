@@ -17,27 +17,6 @@
             background:#f5f7f6;
         }
 
-        .navbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:18px 60px;
-            background:white;
-            box-shadow:0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .logo{
-            font-size:28px;
-            font-weight:600;
-            color:#1f8f5f;
-        }
-
-        .nav-links a{
-            text-decoration:none;
-            color:#444;
-            margin-left:25px;
-            font-size:16px;
-        }
 
         .heading{
             text-align:center;
@@ -136,33 +115,48 @@
             border:1px solid #1f8f5f;
             color:#1f8f5f;
         }
-        .navbar{
+
+.navbar{
+    background:linear-gradient(
+        90deg,
+        #1f8f5f,
+        #111
+    );
+    padding:15px 40px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:18px 50px;
-    background:white;
-    margin-bottom:40px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    flex-wrap:wrap;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
 }
 
 .logo{
-    color:#1f8f5f;
+    color:white;
     font-size:28px;
     font-weight:bold;
 }
 
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
 .nav-links a{
+    color:white;
     text-decoration:none;
-    color:#444;
-    margin-left:20px;
-    font-weight:500;
+    padding:10px 15px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
 }
 
 .nav-links a:hover{
+    background:white;
     color:#1f8f5f;
+    transform:translateY(-2px);
 }
+
 
     </style>
 </head>
@@ -172,33 +166,32 @@
     <div class="navbar">
 
     <div class="logo">
-        SwapKart ♻️
+        ♻️ SwapKart
     </div>
 
     <div class="nav-links">
 
         <a href="/home/">🏠 Home</a>
 
-        <a href="/products/">🛍 Products</a>
-
         <a href="/add-product/">➕ Add Product</a>
 
         <a href="/cart/">🛒 Cart</a>
 
-        <a href="/my-orders/">📦 My Orders</a>
+        <a href="/my-orders/">📦 Orders</a>
 
-        <a href="/my-uploads/">📤 My Uploads</a>
+        <a href="/my-uploads/">📤 Uploads</a>
+
+        <a href="/exchange-requests/">📩 Exchanges</a>
+
+        <a href="/logout/">🚪 Logout</a>
 
     </div>
 
 </div>
 
     <h1 class="heading">
-        🛍 Explore Products
-        <div style="
-    text-align:center;
-    margin-top:30px;
-">
+    🛍 Explore Products
+</h1>
 
 <form method="GET">
 
@@ -230,9 +223,6 @@
     </button>
 
 </form>
-
-</div>
-    </h1>
 
     <div class="products-container">
 
@@ -282,12 +272,16 @@
 
                     </a>
 
-                    <a href="/exchange/{{ product.id }}/"
-                       class="btn exchange-btn">
+                    {% if product.exchange %}
 
-                        🔄 Exchange
+<a href="/exchange/{{ product.id }}/"
+   class="btn exchange-btn">
 
-                    </a>
+   🔄 Exchange
+
+</a>
+
+{% endif %}
 
                 </div>
 
@@ -296,8 +290,6 @@
         </div>
 
         {% endfor %}
-
-    </div>
 
 </body>
 </html>

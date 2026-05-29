@@ -123,13 +123,78 @@
 .nav-links a:hover{
     color:#1f8f5f;
 }
+.navbar{
+    background:linear-gradient(
+        90deg,
+        #1f8f5f,
+        #111
+    );
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+}
 
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    background:white;
+    color:#1f8f5f;
+    transform:translateY(-2px);
+}
     </style>
 
 </head>
 
 <body>
+    <div class="navbar">
 
+    <div class="logo">
+        ♻️ SwapKart
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/home/">🏠 Home</a>
+
+        <a href="/products/">🛍 Products</a>
+
+        <a href="/add-product/">➕ Add Product</a>
+
+        <a href="/cart/">🛒 Cart</a>
+
+        <a href="/my-orders/">📦 Orders</a>
+
+        <a href="/my-uploads/">📤 Uploads</a>
+
+        <a href="/exchange-requests/">📩 Exchanges</a>
+
+        <a href="/logout/">🚪 Logout</a>
+
+    </div>
+
+</div>
     <div class="container">
 
         <h1>💳 Payment</h1>

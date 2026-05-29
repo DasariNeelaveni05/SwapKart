@@ -76,32 +76,46 @@
         .remove-btn{
             background:red;
         }
-        .navbar{
+
+.navbar{
+    background:linear-gradient(
+        90deg,
+        #1f8f5f,
+        #111
+    );
+    padding:15px 40px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:18px 50px;
-    background:white;
-    margin-bottom:40px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    flex-wrap:wrap;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
 }
 
 .logo{
-    color:#1f8f5f;
+    color:white;
     font-size:28px;
     font-weight:bold;
 }
 
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
 .nav-links a{
+    color:white;
     text-decoration:none;
-    color:#444;
-    margin-left:20px;
-    font-weight:500;
+    padding:10px 15px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
 }
 
 .nav-links a:hover{
+    background:white;
     color:#1f8f5f;
+    transform:translateY(-2px);
 }
 
     </style>
@@ -109,6 +123,31 @@
 </head>
 
 <body>
+    <div class="navbar">
+
+    <div class="logo">
+        ♻️ SwapKart
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/home/">🏠 Home</a>
+
+        <a href="/products/">🛍 Products</a>
+
+        <a href="/add-product/">➕ Add Product</a>
+
+        <a href="/my-orders/">📦 Orders</a>
+
+        <a href="/my-uploads/">📤 Uploads</a>
+
+        <a href="/exchange-requests/">📩 Exchanges</a>
+
+        <a href="/logout/">🚪 Logout</a>
+
+    </div>
+
+</div>
 
     <h1>🛒 My Cart</h1>
 
