@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products - SwapKart</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, sans-serif;
+            background:#f5f7f6;
+        }
+
+        .navbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 60px;
+            background:white;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:600;
+            color:#1f8f5f;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:#444;
+            margin-left:25px;
+            font-size:16px;
+        }
+
+        .heading{
+            text-align:center;
+            margin-top:40px;
+            color:#1f8f5f;
+            font-size:38px;
+        }
+
+        .products-container{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:30px;
+            padding:50px;
+        }
+
+        .product-card{
+            width:320px;
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .product-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .product-card img{
+            width:100%;
+            height:230px;
+            object-fit:cover;
+        }
+
+        .product-content{
+            padding:20px;
+        }
+
+        .product-content h2{
+            color:#1f8f5f;
+            margin-bottom:10px;
+        }
+
+        .description{
+            color:#666;
+            line-height:1.6;
+            margin-bottom:15px;
+        }
+
+        .price{
+            font-size:22px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .category{
+            color:#777;
+            margin-bottom:10px;
+        }
+
+        .exchange{
+            color:#1f8f5f;
+            font-weight:600;
+            margin-bottom:18px;
+        }
+
+        .buttons{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:15px;
+        }
+
+        .btn{
+            flex:1;
+            text-align:center;
+            padding:12px;
+            border-radius:10px;
+            text-decoration:none;
+            font-size:14px;
+            transition:0.3s;
+        }
+
+        .cart-btn{
+            background:#1f8f5f;
+            color:white;
+        }
+
+        .buy-btn{
+            background:#ff9800;
+            color:white;
+        }
+
+        .exchange-btn{
+            border:1px solid #1f8f5f;
+            color:#1f8f5f;
+        }
+        .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 50px;
+    background:white;
+    margin-bottom:40px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+    color:#1f8f5f;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#444;
+    margin-left:20px;
+    font-weight:500;
+}
+
+.nav-links a:hover{
+    color:#1f8f5f;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+    <div class="logo">
+        SwapKart ♻️
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/home/">🏠 Home</a>
+
+        <a href="/products/">🛍 Products</a>
+
+        <a href="/add-product/">➕ Add Product</a>
+
+        <a href="/cart/">🛒 Cart</a>
+
+        <a href="/my-orders/">📦 My Orders</a>
+
+        <a href="/my-uploads/">📤 My Uploads</a>
+
+    </div>
+
+</div>
+
+    <h1 class="heading">
+        🛍 Explore Products
+        <div style="
+    text-align:center;
+    margin-top:30px;
+">
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="🔍 Search products..."
+        style="
+            width:400px;
+            padding:14px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            font-size:16px;
+        ">
+
+    <button
+        type="submit"
+        style="
+            padding:14px 25px;
+            background:#1f8f5f;
+            color:white;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+        ">
+
+        Search
+
+    </button>
+
+</form>
+
+</div>
+    </h1>
+
+    <div class="products-container">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <img src="{{ product.image.url }}">
+
+            <div class="product-content">
+
+                <h2>
+                    {{ product.title }}
+                </h2>
+
+                <p class="description">
+                    {{ product.description }}
+                </p>
+
+                <p class="price">
+                    ₹{{ product.price }}
+                </p>
+
+                <p class="category">
+                    📦 {{ product.category }}
+                </p>
+
+                {% if product.exchange %}
+                    <p class="exchange">
+                        🔄 Exchange Available
+                    </p>
+                {% endif %}
+
+                <div class="buttons">
+
+                    <a href="/add-to-cart/{{ product.id }}/"
+                       class="btn cart-btn">
+
+                        🛒 Add To Cart
+
+                    </a>
+
+                    <a href="/buy-now/{{ product.id }}/"
+                       class="btn buy-btn">
+
+                        ⚡ Buy Now
+
+                    </a>
+
+                    <a href="/exchange/{{ product.id }}/"
+                       class="btn exchange-btn">
+
+                        🔄 Exchange
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>
+

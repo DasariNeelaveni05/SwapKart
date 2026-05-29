@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SwapKart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+    font-family:Arial,sans-serif;
+    background:#f5f7f6;
+    color:#222;
+    transition:0.4s;
+}
+
+        .dark-mode{
+            background:#121212;
+            color:white;
+        }
+
+        .navbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 60px;
+            background:white;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .navbar{
+            background:#1b1b1b;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:600;
+            color:#1f8f5f;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:#444;
+            margin-left:28px;
+            font-size:16px;
+        }
+
+        .dark-mode .nav-links a{
+            color:white;
+        }
+
+        .theme-btn{
+            padding:8px 15px;
+            border:none;
+            border-radius:20px;
+            background:#1f8f5f;
+            color:white;
+            cursor:pointer;
+            margin-left:20px;
+        }
+
+        .hero{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:70px 60px;
+            min-height:85vh;
+        }
+
+        .hero-text{
+            width:48%;
+        }
+
+        .tag{
+            display:inline-block;
+            background:#dff5ea;
+            color:#1f8f5f;
+            padding:8px 18px;
+            border-radius:25px;
+            font-size:15px;
+            margin-bottom:25px;
+        }
+
+        .hero-text h1{
+            font-size:50px;
+            font-weight:600;
+            line-height:1.3;
+            margin-bottom:20px;
+        }
+
+        .hero-text p{
+            font-size:18px;
+            color:#666;
+            line-height:1.8;
+            max-width:550px;
+        }
+
+        .dark-mode .hero-text p{
+            color:#bbb;
+        }
+
+        .buttons{
+            margin-top:35px;
+        }
+
+        .btn{
+            text-decoration:none;
+            padding:14px 28px;
+            border-radius:12px;
+            font-size:16px;
+            margin-right:15px;
+            transition:0.3s;
+            display:inline-block;
+        }
+
+        .primary-btn{
+            background:#1f8f5f;
+            color:white;
+        }
+
+        .secondary-btn{
+            border:1px solid #1f8f5f;
+            color:#1f8f5f;
+        }
+
+        .hero-image{
+            width:45%;
+        }
+
+        .exchange-box{
+            background:white;
+            border-radius:25px;
+            padding:25px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .dark-mode .exchange-box{
+            background:#1e1e1e;
+        }
+
+        .exchange-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:18px;
+        }
+
+        .product-card{
+            background:#f5f5f5;
+            border-radius:18px;
+            overflow:hidden;
+            text-align:center;
+            padding-bottom:12px;
+        }
+
+        .dark-mode .product-card{
+            background:#2a2a2a;
+        }
+
+        .product-card img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+        }
+
+        .product-card h3{
+            margin-top:12px;
+            font-size:17px;
+        }
+
+        .products-title{
+            text-align:center;
+            margin-top:40px;
+            margin-bottom:30px;
+            color:#1f8f5f;
+            font-size:35px;
+        }
+
+        .features{
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            padding:20px 60px 80px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            background: white;
+            width:280px;
+            padding:25px;
+            border-radius:20px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.05);
+            transition:0.3s;
+        }
+
+        .dark-mode .card{
+            background:#1f1f1f;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h3{
+            margin-bottom:15px;
+            color:#1f8f5f;
+        }
+
+        .card p{
+            color:#666;
+            line-height:1.7;
+        }
+
+        .dark-mode .card p{
+            color:#bbb;
+        }
+        .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 50px;
+    background:white;
+    margin-bottom:40px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+    color:#1f8f5f;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#444;
+    margin-left:20px;
+    font-weight:500;
+}
+
+.nav-links a:hover{
+    color:#1f8f5f;
+}
+.logout-btn{
+    background:#e53935;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.logout-btn:hover{
+    background:#c62828;
+}
+/* MOBILE RESPONSIVE */
+
+@media screen and (max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        padding:20px;
+        text-align:center;
+    }
+
+    .nav-links{
+        margin-top:15px;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .nav-links a{
+        margin:5px;
+    }
+
+    .hero{
+        flex-direction:column;
+        padding:30px 20px;
+        text-align:center;
+    }
+
+    .hero-text{
+        width:100%;
+    }
+
+    .hero-image{
+        width:100%;
+        margin-top:30px;
+    }
+
+    .hero-text h1{
+        font-size:35px;
+    }
+
+    .buttons{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .btn{
+        width:100%;
+        margin:0;
+    }
+
+    .exchange-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        padding:20px;
+    }
+
+    .card{
+        width:100%;
+        max-width:350px;
+    }
+
+}
+
+    </style>
+</head>
+
+<body id="body">
+
+    <div class="navbar">
+
+    <div class="logo">
+        SwapKart ♻️
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/home/">🏠 Home</a>
+
+        <a href="/products/">🛍 Products</a>
+
+        <a href="/add-product/">➕ Add Product</a>
+
+        <a href="/cart/">🛒 Cart</a>
+
+        <a href="/my-orders/">📦 My Orders</a>
+
+        <a href="/my-uploads/">📤 My Uploads</a>
+
+    </div>
+
+</div>
+
+    <div class="hero">
+
+        <div class="hero-text">
+
+            <div class="tag">
+                Vasthu Marpidi • Smart Reuse
+            </div>
+
+            <h1>
+                <ul>
+                    <li>
+                        Buy
+                    </li>
+                    <li>
+                         Sell 
+                    </li>
+                    <li>Exchange ♻️</li> 
+                </ul>
+            </h1>
+
+            <p>
+                A modern platform where students and families can exchange,
+                sell and discover useful products in an affordable and sustainable way.
+            </p>
+
+           <div class="buttons">
+
+    <a href="/add-product/" class="btn primary-btn">
+        🛍 Add Product
+    </a>
+
+    <a href="/products/" class="btn secondary-btn">
+        🔄 Start Exchange
+    </a>
+
+    <br><br>
+    <a href="/exchange-requests/"
+   class="btn secondary-btn">
+
+   📩 Exchange Requests
+
+</a>
+    <button
+        class="btn logout-btn"
+        onclick="confirmLogout()">
+
+        🚪 Logout
+
+    </button>
+
+</div>
+             
+        </div>
+
+        <div class="hero-image">
+
+            <div class="exchange-box">
+
+                <div class="exchange-grid">
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop">
+                        <h3>💻 Laptop</h3>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop">
+                        <h3>📚 Books</h3>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop">
+                        <h3>🪑 Furniture</h3>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=1200&auto=format&fit=crop">
+                        <h3>🚲 Cycle</h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h2 class="products-title">
+        🛍 Latest Products
+    </h2>
+
+    <div class="features">
+
+        {% for product in products %}
+
+        <div class="card">
+
+            <h3>
+                {{ product.title }}
+            </h3>
+
+            <p>
+                {{ product.description }}
+            </p>
+
+            <br>
+
+            <p>
+                💰 ₹{{ product.price }}
+            </p>
+
+            <p>
+                📦 {{ product.category }}
+            </p>
+
+            {% if product.exchange %}
+                <p>
+                    🔄 Exchange Available
+                </p>
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <p style="color:gray; font-size:20px;">
+            No products added yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    <script>
+
+        function toggleTheme(){
+            document.body.classList.toggle("dark-mode");
+        }
+
+    </script>
+    <script>
+
+function confirmLogout(){
+
+    let result = confirm(
+        "Are you sure you want to logout?"
+    );
+
+    if(result){
+        window.location.href="/logout/";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+

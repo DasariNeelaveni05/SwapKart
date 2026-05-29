@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup - SwapKart</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f5f5;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .signup-box{
+            background:white;
+            padding:40px;
+            width:350px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            text-align:center;
+            color:#00aa55;
+            margin-bottom:25px;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#00cc66;
+            border:none;
+            color:white;
+            font-size:18px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        p{
+            text-align:center;
+            margin-top:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="signup-box">
+
+        <h1>Create Account</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" 
+           name="username" 
+           placeholder="Enter Username">
+
+    <input type="email" 
+           name="email" 
+           placeholder="Enter Email">
+
+    <input type="password" 
+           name="password" 
+           placeholder="Enter Password">
+
+    <button type="submit">
+        Signup
+    </button>
+
+</form>
+
+
+        <p>
+            Already have an account? Login
+        </p>
+
+    </div>
+
+</body>
+</html>
