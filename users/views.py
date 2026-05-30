@@ -27,6 +27,9 @@ def home(request):
 
 
 
+from django.contrib.auth.models import User
+from django.contrib import messages
+
 def signup(request):
 
     if request.method == "POST":
@@ -35,10 +38,21 @@ def signup(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
+        if User.objects.filter(username=username).exists():
+
+            return render(request, 'signup.html', {
+                'error': 'Username already exists'
+            })
+
         User.objects.create_user(
             username=username,
             email=email,
             password=password
+        )
+
+        messages.success(
+            request,
+            "Account created successfully. Please login."
         )
 
         return redirect('/login/')
@@ -53,11 +67,16 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        print("USERNAME =", username)
+        print("PASSWORD =", password)
+
         user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+    request,
+    username=username,
+    password=password
+)
+
+        print("USER =", user)
 
         if user is not None:
 
