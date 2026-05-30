@@ -157,6 +157,16 @@ select{
     color:#1f8f5f;
     transform:translateY(-2px);
 }
+.success-message{
+    background:#d4edda;
+    color:#155724;
+    padding:15px;
+    margin-bottom:20px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+    border:1px solid #c3e6cb;
+}
 
     </style>
 
@@ -189,9 +199,15 @@ select{
     <div class="container">
 
         <h1>🛍 Add Product</h1>
+        {% if messages %}
+    {% for message in messages %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
-        <form method="POST"
-              enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
 
             {% csrf_token %}
 

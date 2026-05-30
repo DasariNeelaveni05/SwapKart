@@ -126,14 +126,11 @@
 <p><b>Message:</b> {{ req.message }}</p>
 
 {% if req.exchange_image %}
-
-<img src="{{ req.exchange_image.url }}"
-     style="
-     width:250px;
-     border-radius:12px;
-     margin-top:10px;
-     ">
-
+{% if req.exchange_image %}
+    <img src="{{ req.exchange_image.url }}"
+         style="width:250px;border-radius:12px;margin-top:10px;">
+{% else %}
+    <p>No image uploaded</p>
 {% endif %}
 
 <b>Status:</b>

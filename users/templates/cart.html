@@ -157,7 +157,11 @@
 
         <div class="cart-card">
 
-            <img src="{{ item.product.image.url }}">
+            {% if product.image %}
+    <img src="{{ product.image.url }}">
+{% else %}
+    <img src="https://via.placeholder.com/300x300?text=No+Image">
+{% endif %}
 
             <div class="content">
 

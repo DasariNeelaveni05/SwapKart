@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
@@ -23,7 +24,6 @@ def home(request):
     return render(request, 'home.html', {
         'products': products
     })
-
 
 
 
@@ -80,15 +80,10 @@ def add_product(request):
     if request.method == "POST":
 
         title = request.POST.get('title')
-
         description = request.POST.get('description')
-
         price = request.POST.get('price')
-
         category = request.POST.get('category')
-
         exchange_value = request.POST.get('exchange')
-
         image = request.FILES.get('image')
 
         exchange = False
@@ -106,7 +101,12 @@ def add_product(request):
             image=image
         )
 
-        return redirect('/products/')
+        messages.success(
+            request,
+            "✅ Product added successfully!"
+        )
+
+        return redirect('/add-product/')
 
     return render(request, 'add_product.html')
 
