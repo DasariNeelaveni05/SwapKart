@@ -30,7 +30,8 @@
         #1f8f5f,
         #111
     );
-    padding:15px 40px;
+    padding:20px 50px;
+    border-bottom:3px solid #2ecc71;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -67,19 +68,6 @@
 
         .dark-mode .navbar{
             background:#1b1b1b;
-        }
-
-        .logo{
-            font-size:28px;
-            font-weight:600;
-            color:#1f8f5f;
-        }
-
-        .nav-links a{
-            text-decoration:none;
-            color:#444;
-            margin-left:28px;
-            font-size:16px;
         }
 
         .dark-mode .nav-links a{
@@ -250,33 +238,6 @@
         .dark-mode .card p{
             color:#bbb;
         }
-        .navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 50px;
-    background:white;
-    margin-bottom:40px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
-
-.logo{
-    color:#1f8f5f;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#444;
-    margin-left:20px;
-    font-weight:500;
-}
-
-.nav-links a:hover{
-    color:#1f8f5f;
-}
 .logout-btn{
     background:#e53935;
     color:white;
@@ -305,9 +266,23 @@
         gap:10px;
     }
 
-    .nav-links a{
-        margin:5px;
-    }
+    .logo{
+    color:#ffffff;
+    font-size:42px;
+    font-weight:bold;
+    text-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+
+.nav-links a{
+    color:#ffffff;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:8px;
+    white-space:nowrap;
+    transition:0.3s;
+    font-weight:600;
+    font-size:20px;
+}
 
     .hero{
         flex-direction:column;
@@ -377,6 +352,8 @@
 
         <a href="/my-uploads/">📤 My Uploads</a>
 
+        <a href="/exchange-requests/">📩 Exchanges</a>
+
     </div>
 
 </div>
@@ -386,24 +363,17 @@
         <div class="hero-text">
 
             <div class="tag">
-                Vasthu Marpidi • Smart Reuse
+                ♻️ Sustainable Marketplace
             </div>
 
-            <h1>
-                <ul>
-                    <li>
-                        Buy
-                    </li>
-                    <li>
-                         Sell 
-                    </li>
-                    <li>Exchange ♻️</li> 
-                </ul>
-            </h1>
+           <h1>
+    Buy, Sell & Exchange
+    Products Easily ♻️
+</h1>
 
             <p>
-                A modern platform where students and families can exchange,
-                sell and discover useful products in an affordable and sustainable way.
+                Buy, sell and exchange products securely.
+                Give unused items a second life while saving money.
             </p>
 
            <div class="buttons">

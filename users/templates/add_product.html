@@ -16,20 +16,18 @@
             font-family:Arial, sans-serif;
             background:#f5f7f6;
             color:#222;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            min-height:100vh;
             padding:40px;
         }
 
         .container{
-            width:550px;
-            background:white;
-            padding:40px;
-            border-radius:25px;
-            box-shadow:0 5px 25px rgba(0,0,0,0.4);
-        }
+    width:90%;
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
 
         h1{
             text-align:center;
@@ -46,19 +44,17 @@
             font-size:15px;
         }
 
-        input,
-        textarea,
-        select{
-            width:100%;
-            padding:14px;
-            margin-bottom:25px;
-            border:1px solid #ddd;
-            border-radius:12px;
-            background:#2a2a2a;
-            color:white;
-            font-size:15px;
-            transition:0.3s;
-        }
+       input,
+textarea,
+select{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    margin-bottom:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
 
         input:focus,
         textarea:focus,
@@ -104,16 +100,16 @@
         }
 
         button{
-            width:100%;
-            padding:15px;
-            border:none;
-            border-radius:12px;
-            background:#1f8f5f;
-            color:white;
-            font-size:17px;
-            cursor:pointer;
-            transition:0.3s;
-        }
+    width:100%;
+    background:#1f8f5f;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
 
         button:hover{
             background:#18724c;
@@ -167,7 +163,6 @@
 </head>
 
 <body>
-    <body>
 
 <div class="navbar">
 
@@ -258,8 +253,6 @@
                 </p>
 
                 <label class="custom-upload">
-
-                    Choose Product Image
 
                     <input type="file"
                            name="image"
