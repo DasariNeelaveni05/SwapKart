@@ -257,9 +257,6 @@ def remove_from_cart(request, cart_id):
 
     return redirect('/cart/')
 
-
-
-
 @login_required
 def buy_now(request, product_id):
 
@@ -276,24 +273,20 @@ def buy_now(request, product_id):
         payment_method = request.POST.get('payment_method', 'COD').strip()
         transaction_id = request.POST.get('transaction_id', '').strip()
 
-        # Set payment status: COD is Pending, UPI is Paid (since it went through simulated verification)
-        payment_method = request.POST.get('payment_method', 'COD').strip()
-        transaction_id = request.POST.get('transaction_id', '').strip()
-
         if payment_method == "UPI" and not transaction_id:
 
-                messages.error(
-                    request,
-                    "Please enter UPI Transaction ID"
-                )
+            messages.error(
+                request,
+                "Please enter UPI Transaction ID"
+            )
 
-        return render(
+            return render(
                 request,
                 'payment.html',
                 {'product': product}
             )
 
-        if payment_method == 'UPI' and transaction_id:
+        if payment_method == 'UPI':
             payment_status = 'Paid'
         else:
             payment_status = 'Pending'
@@ -319,11 +312,16 @@ def buy_now(request, product_id):
 
         return redirect('/my-orders/')
 
-    return render(request,
-                  'payment.html',
-                  {
-                      'product': product
-                  })
+    return render(
+        request,
+        'payment.html',
+        {
+            'product': product
+        }
+    )
+
+
+
 
 @login_required
 def my_orders(request):
