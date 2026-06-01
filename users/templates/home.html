@@ -1,547 +1,183 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>SwapKart</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-    font-family:Arial,sans-serif;
-    background:#f5f7f6;
-    color:#222;
-    transition:0.4s;
-}
-
-        .dark-mode{
-            background:#121212;
-            color:white;
-        }
-
-        .navbar{
-    background:linear-gradient(
-        90deg,
-        #1f8f5f,
-        #111
-    );
-    padding:20px 50px;
-    border-bottom:3px solid #2ecc71;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    box-shadow:0 3px 15px rgba(0,0,0,0.2);
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:8px;
-    white-space:nowrap;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    background:white;
-    color:#1f8f5f;
-    transform:translateY(-2px);
-}
-
-        .dark-mode .navbar{
-            background:#1b1b1b;
-        }
-
-        .dark-mode .nav-links a{
-            color:white;
-        }
-
-        .theme-btn{
-            padding:8px 15px;
-            border:none;
-            border-radius:20px;
-            background:#1f8f5f;
-            color:white;
-            cursor:pointer;
-            margin-left:20px;
-        }
-
-        .hero{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:70px 60px;
-            min-height:85vh;
-        }
-
-        .hero-text{
-            width:48%;
-        }
-
-        .tag{
-            display:inline-block;
-            background:#dff5ea;
-            color:#1f8f5f;
-            padding:8px 18px;
-            border-radius:25px;
-            font-size:15px;
-            margin-bottom:25px;
-        }
-
-        .hero-text h1{
-            font-size:50px;
-            font-weight:600;
-            line-height:1.3;
-            margin-bottom:20px;
-        }
-
-        .hero-text p{
-            font-size:18px;
-            color:#666;
-            line-height:1.8;
-            max-width:550px;
-        }
-
-        .dark-mode .hero-text p{
-            color:#bbb;
-        }
-
-        .buttons{
-            margin-top:35px;
-        }
-
-        .btn{
-            text-decoration:none;
-            padding:14px 28px;
-            border-radius:12px;
-            font-size:16px;
-            margin-right:15px;
-            transition:0.3s;
-            display:inline-block;
-        }
-
-        .primary-btn{
-            background:#1f8f5f;
-            color:white;
-        }
-
-        .secondary-btn{
-            border:1px solid #1f8f5f;
-            color:#1f8f5f;
-        }
-
-        .hero-image{
-            width:45%;
-        }
-
-        .exchange-box{
-            background:white;
-            border-radius:25px;
-            padding:25px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .dark-mode .exchange-box{
-            background:#1e1e1e;
-        }
-
-        .exchange-grid{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:18px;
-        }
-
-        .product-card{
-            background:#f5f5f5;
-            border-radius:18px;
-            overflow:hidden;
-            text-align:center;
-            padding-bottom:12px;
-        }
-
-        .dark-mode .product-card{
-            background:#2a2a2a;
-        }
-
-        .product-card img{
-            width:100%;
-            height:160px;
-            object-fit:cover;
-        }
-
-        .product-card h3{
-            margin-top:12px;
-            font-size:17px;
-        }
-
-        .products-title{
-            text-align:center;
-            margin-top:40px;
-            margin-bottom:30px;
-            color:#1f8f5f;
-            font-size:35px;
-        }
-
-        .features{
-            display:flex;
-            justify-content:center;
-            gap:25px;
-            padding:20px 60px 80px;
-            flex-wrap:wrap;
-        }
-
-        .card{
-            background: white;
-            width:280px;
-            padding:25px;
-            border-radius:20px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.05);
-            transition:0.3s;
-        }
-
-        .dark-mode .card{
-            background:#1f1f1f;
-        }
-
-        .card:hover{
-            transform:translateY(-5px);
-        }
-
-        .card h3{
-            margin-bottom:15px;
-            color:#1f8f5f;
-        }
-
-        .card p{
-            color:#666;
-            line-height:1.7;
-        }
-
-        .dark-mode .card p{
-            color:#bbb;
-        }
-.logout-btn{
-    background:#e53935;
-    color:white;
-    border:none;
-    cursor:pointer;
-}
-
-.logout-btn:hover{
-    background:#c62828;
-}
-/* MOBILE RESPONSIVE */
-
-@media screen and (max-width:768px){
-
-    .navbar{
-        flex-direction:column;
-        padding:20px;
-        text-align:center;
-    }
-
-    .nav-links{
-        margin-top:15px;
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:10px;
-    }
-
-    .logo{
-    color:#ffffff;
-    font-size:42px;
-    font-weight:bold;
-    text-shadow:0 2px 8px rgba(0,0,0,0.3);
-}
-
-.nav-links a{
-    color:#ffffff;
-    text-decoration:none;
-    padding:12px 18px;
-    border-radius:8px;
-    white-space:nowrap;
-    transition:0.3s;
-    font-weight:600;
-    font-size:20px;
-}
-
-    .hero{
-        flex-direction:column;
-        padding:30px 20px;
-        text-align:center;
-    }
-
-    .hero-text{
-        width:100%;
-    }
-
-    .hero-image{
-        width:100%;
-        margin-top:30px;
-    }
-
-    .hero-text h1{
-        font-size:35px;
-    }
-
-    .buttons{
-        display:flex;
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .btn{
-        width:100%;
-        margin:0;
-    }
-
-    .exchange-grid{
-        grid-template-columns:1fr;
-    }
-
-    .features{
-        padding:20px;
-    }
-
-    .card{
-        width:100%;
-        max-width:350px;
-    }
-
-}
-
-    </style>
-</head>
-
-<body id="body">
-
-    <div class="navbar">
-
-    <div class="logo">
-        SwapKart ♻️
-    </div>
-
-    <div class="nav-links">
-
-        <a href="/products/">🛍 Products</a>
-
-        <a href="/add-product/">➕ Add Product</a>
-
-        <a href="/cart/">🛒 Cart</a>
-
-        <a href="/my-orders/">📦 My Orders</a>
-
-        <a href="/my-uploads/">📤 My Uploads</a>
-
-        <a href="/exchange-requests/">📩 Exchanges</a>
-
-    </div>
-
-</div>
-
-    <div class="hero">
-
-        <div class="hero-text">
-
-            <div class="tag">
-                ♻️ Sustainable Marketplace
-            </div>
-
-           <h1>
-    Buy, Sell & Exchange
-    Products Easily ♻️
-</h1>
-
-            <p>
-                Buy, sell and exchange products securely.
-                Give unused items a second life while saving money.
-            </p>
-
-           <div class="buttons">
-
-    <a href="/add-product/" class="btn primary-btn">
-        🛍 Add Product
-    </a>
-
-    <a href="/products/" class="btn secondary-btn">
-        🔄 Start Exchange
-    </a>
-
-    <br><br>
-    <a href="/exchange-requests/"
-   class="btn secondary-btn">
-
-   📩 Exchange Requests
-
-</a>
-    <button
-        class="btn logout-btn"
-        onclick="confirmLogout()">
-
-        🚪 Logout
-
-    </button>
-
-</div>
-             
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SwapKart – Buy, Sell & Exchange Products{% endblock %}
+
+{% block content %}
+
+<section class="sk-hero">
+  <div class="sk-container">
+    <div class="sk-hero-grid">
+      <div>
+        <div class="sk-hero-badge">Welcome back to SwapKart</div>
+        <h1 class="sk-hero-title">
+          Buy, Sell &amp;<br/>
+          <span class="text-gradient">Exchange</span><br/>
+          with Ease
+        </h1>
+        <p class="sk-hero-desc">Discover verified pre-owned products or list yours in under 2 minutes. Completely free.</p>
+        <form method="GET" action="/products/">
+          <div class="sk-search-wrap sk-search-hero">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input type="text" name="search" placeholder="Search mobiles, laptops, bikes, furniture…"/>
+            <button type="submit" class="search-btn">Search</button>
+          </div>
+        </form>
+        <div class="sk-hero-cta">
+          <a href="/products/" class="btn-primary btn-lg">Browse Products</a>
+          <a href="/add-product/" class="btn-secondary btn-lg">Sell Now</a>
         </div>
-
-        <div class="hero-image">
-
-            <div class="exchange-box">
-
-                <div class="exchange-grid">
-
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop">
-                        <h3>💻 Laptop</h3>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop">
-                        <h3>📚 Books</h3>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop">
-                        <h3>🪑 Furniture</h3>
-                    </div>
-
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=1200&auto=format&fit=crop">
-                        <h3>🚲 Cycle</h3>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+      </div>
+      <div class="sk-hero-image">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&amp;w=900&amp;auto=format&amp;fit=crop" alt="Marketplace shopping"/>
+      </div>
     </div>
+  </div>
+</section>
 
-    <h2 class="products-title">
-        🛍 Latest Products
-    </h2>
-
-    <div class="features" style="display:flex; justify-content:center; gap:30px; padding:20px 20px 80px; flex-wrap:wrap;">
-
-        {% for product in products %}
-
-        <div class="card" style="width:280px; background:white; border-radius:18px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.06); transition:0.3s; display:flex; flex-direction:column; border: 1px solid #eee;">
-
-            {% if product.image %}
-                <img src="{{ product.image.url }}" style="width:100%; height:180px; object-fit:cover;">
-            {% else %}
-                <img src="https://via.placeholder.com/300x180?text=No+Image" style="width:100%; height:180px; object-fit:cover;">
-            {% endif %}
-
-            <div style="padding:18px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
-                <div>
-                    <h3 style="color:#1f8f5f; font-size:18px; margin-bottom:8px; font-weight:700;">
-                        {{ product.title }}
-                    </h3>
-
-                    <p style="color:#666; font-size:13px; line-height:1.5; margin-bottom:12px; height: 38px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
-                        {{ product.description }}
-                    </p>
-
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <span style="font-size:18px; font-weight:bold; color:#333;">💰 ₹{{ product.price }}</span>
-                        <span style="background:#e8f7ef; color:#1f8f5f; font-size:11px; padding:4px 8px; border-radius:12px; font-weight:600;">📦 {{ product.category }}</span>
-                    </div>
-
-                    {% if product.exchange %}
-                        <p style="color:#1f8f5f; font-size:12px; font-weight:bold; margin-bottom:15px; display:flex; align-items:center; gap:4px;">
-                            🔄 Exchange Available
-                        </p>
-                    {% else %}
-                        <div style="height:15px; margin-bottom:15px;"></div>
-                    {% endif %}
-                </div>
-
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="display:flex; gap:8px;">
-                        <a href="/add-to-cart/{{ product.id }}/"
-                           style="flex:1; text-align:center; padding:10px; border-radius:8px; text-decoration:none; font-size:13px; font-weight:bold; background:#1f8f5f; color:white; transition:0.2s;"
-                           onmouseover="this.style.background='#145e3e'"
-                           onmouseout="this.style.background='#1f8f5f'">
-                            🛒 Cart
-                        </a>
-
-                        <a href="/buy-now/{{ product.id }}/"
-                           style="flex:1; text-align:center; padding:10px; border-radius:8px; text-decoration:none; font-size:13px; font-weight:bold; background:#ff9800; color:white; transition:0.2s;"
-                           onmouseover="this.style.background='#e65100'"
-                           onmouseout="this.style.background='#ff9800'">
-                            ⚡ Buy Now
-                        </a>
-                    </div>
-                    
-                    {% if product.exchange %}
-                        <a href="/exchange/{{ product.id }}/"
-                           style="text-align:center; padding:10px; border-radius:8px; text-decoration:none; font-size:13px; font-weight:bold; background:white; color:#1f8f5f; border:1px solid #1f8f5f; transition:0.2s;"
-                           onmouseover="this.style.background='#e8f7ef'"
-                           onmouseout="this.style.background='white'">
-                            🔄 Exchange Request
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-
-        </div>
-
-        {% empty %}
-
-        <p style="color:gray; font-size:20px; text-align:center; width:100%; margin-top:40px;">
-            No products added yet.
-        </p>
-
-        {% endfor %}
-
+<section class="sk-section sk-section-alt">
+  <div class="sk-container">
+    <div class="sk-section-heading">
+      <h2 class="sk-section-title">Browse by Category</h2>
+      <a href="/products/" class="sk-section-link">View All →</a>
     </div>
+    <div class="sk-categories">
+      <a href="/products/?search=mobile" class="sk-cat-chip"><span class="cat-icon">📱</span><span class="cat-label">Mobiles</span></a>
+      <a href="/products/?search=laptop" class="sk-cat-chip"><span class="cat-icon">💻</span><span class="cat-label">Laptops</span></a>
+      <a href="/products/?search=bike" class="sk-cat-chip"><span class="cat-icon">🏍</span><span class="cat-label">Bikes</span></a>
+      <a href="/products/?search=fashion" class="sk-cat-chip"><span class="cat-icon">👗</span><span class="cat-label">Fashion</span></a>
+      <a href="/products/?search=gadget" class="sk-cat-chip"><span class="cat-icon">🎮</span><span class="cat-label">Gadgets</span></a>
+      <a href="/products/?search=furniture" class="sk-cat-chip"><span class="cat-icon">🪑</span><span class="cat-label">Furniture</span></a>
+      <a href="/products/?search=book" class="sk-cat-chip"><span class="cat-icon">📚</span><span class="cat-label">Books</span></a>
+      <a href="/products/?search=cycle" class="sk-cat-chip"><span class="cat-icon">🚲</span><span class="cat-label">Cycles</span></a>
+    </div>
+  </div>
+</section>
 
-    <script>
+<section class="sk-section">
+  <div class="sk-container">
+    <div class="sk-section-heading">
+      <h2 class="sk-section-title">Featured Products</h2>
+      <a href="/products/" class="sk-section-link">See All →</a>
+    </div>
+    {% if products %}
+    <div class="sk-products-grid">
+      {% for product in products|slice:":12" %}
+      <div class="sk-product-card">
+        <div class="card-img-wrap">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}"/>
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&amp;auto=format&amp;fit=crop" alt="{{ product.title }}"/>
+          {% endif %}
+          {% if product.exchange %}<span class="card-badge">Exchange</span>{% endif %}
+          <button type="button" class="card-wishlist" title="Add to wishlist">♡</button>
+        </div>
+        <div class="card-body">
+          <div class="card-category">{{ product.category }}</div>
+          <div class="card-title">{{ product.title }}</div>
+          <div class="card-price">₹{{ product.price }}</div>
+          <div class="card-meta"><span>{{ product.user.username }}</span></div>
+          <div class="card-actions">
+            <a href="/add-to-cart/{{ product.id }}/" class="btn-ghost btn-sm" style="flex:1;text-align:center;">Cart</a>
+            <a href="/buy-now/{{ product.id }}/" class="btn-primary btn-sm" style="flex:1;text-align:center;">Buy</a>
+          </div>
+          {% if product.exchange %}
+          <a href="/exchange/{{ product.id }}/" class="btn-secondary btn-sm btn-full" style="margin-top:0.4rem;text-align:center;">Exchange</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="sk-empty-state">
+      <p>No products listed yet. Be the first!</p>
+      <a href="/add-product/" class="btn-primary">Add Product</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
 
-        function toggleTheme(){
-            document.body.classList.toggle("dark-mode");
-        }
+<section class="sk-section sk-section-soft">
+  <div class="sk-container">
+    <div class="text-center mb-4">
+      <h2 class="sk-section-title" style="padding-left:0;display:inline-block;">How It Works</h2>
+    </div>
+    <div class="sk-how-grid">
+      <div class="sk-how-card"><div class="sk-how-icon">🛍</div><h3>Buy</h3><p class="text-sm text-muted">Find deals and checkout securely.</p></div>
+      <div class="sk-how-card"><div class="sk-how-icon">📸</div><h3>Sell</h3><p class="text-sm text-muted">List items with photos in minutes.</p></div>
+      <div class="sk-how-card"><div class="sk-how-icon">🔄</div><h3>Exchange</h3><p class="text-sm text-muted">Swap directly with other users.</p></div>
+    </div>
+  </div>
+</section>
 
-    </script>
-    <script>
+<section class="sk-section sk-section-alt">
+  <div class="sk-container">
+    <div class="sk-section-heading"><h2 class="sk-section-title">Marketplace Benefits</h2></div>
+    <div class="sk-benefit-grid">
+      <div class="sk-benefit-item"><div class="sk-benefit-icon">💸</div><div><h4>Zero Commission</h4><p class="text-sm text-muted">No listing fees or hidden charges.</p></div></div>
+      <div class="sk-benefit-item"><div class="sk-benefit-icon">🔄</div><div><h4>Easy Exchange</h4><p class="text-sm text-muted">Trade items without middlemen.</p></div></div>
+      <div class="sk-benefit-item"><div class="sk-benefit-icon">🔒</div><div><h4>Safe &amp; Secure</h4><p class="text-sm text-muted">Trusted community marketplace.</p></div></div>
+    </div>
+  </div>
+</section>
 
-function confirmLogout(){
+<section class="sk-section">
+  <div class="sk-container">
+    <div class="sk-section-heading"><h2 class="sk-section-title">Trust &amp; Safety</h2></div>
+    <div class="sk-trust-grid">
+      <div class="sk-trust-card"><span style="font-size:1.75rem;">✓</span><strong>Verified Sellers</strong></div>
+      <div class="sk-trust-card"><span style="font-size:1.75rem;">🔒</span><strong>Secure Payments</strong></div>
+      <div class="sk-trust-card"><span style="font-size:1.75rem;">🛡</span><strong>Buyer Support</strong></div>
+    </div>
+  </div>
+</section>
 
-    let result = confirm(
-        "Are you sure you want to logout?"
-    );
+<section class="sk-section sk-section-alt">
+  <div class="sk-container">
+    <div class="sk-stats-strip">
+      <div class="sk-stat-item"><div class="stat-number">10K+</div><div class="stat-label">Products Listed</div></div>
+      <div class="sk-stat-item"><div class="stat-number">5K+</div><div class="stat-label">Active Users</div></div>
+      <div class="sk-stat-item"><div class="stat-number">2K+</div><div class="stat-label">Exchanges Done</div></div>
+      <div class="sk-stat-item"><div class="stat-number">₹0</div><div class="stat-label">Listing Fee</div></div>
+    </div>
+  </div>
+</section>
 
-    if(result){
-        window.location.href="/logout/";
-    }
+<section class="sk-section">
+  <div class="sk-container">
+    <div class="sk-section-heading" style="justify-content:center;margin-bottom:2rem;">
+      <h2 class="sk-section-title" style="padding-left:0;">Customer Testimonials</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+      <div class="sk-testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Sold my old laptop in 3 hours. Smooth and trustworthy."</p>
+        <div class="reviewer"><div class="reviewer-avatar">R</div><div><div class="reviewer-name">Rahul Sharma</div><div class="reviewer-role">Hyderabad</div></div></div>
+      </div>
+      <div class="sk-testimonial">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"The exchange feature is unique and brilliant."</p>
+        <div class="reviewer"><div class="reviewer-avatar">P</div><div><div class="reviewer-name">Priya Nair</div><div class="reviewer-role">Bengaluru</div></div></div>
+      </div>
+      <div class="sk-testimonial">
+        <div class="stars">★★★★☆</div>
+        <p class="review-text">"Amazing books and gadgets at great prices."</p>
+        <div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Arjun Patel</div><div class="reviewer-role">Pune</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-}
+<section class="sk-section sk-section-soft">
+  <div class="sk-container text-center">
+    <h2 style="font-size:1.85rem;font-weight:900;margin-bottom:0.75rem;">Ready to declutter &amp; earn?</h2>
+    <p class="sk-hero-desc" style="margin:0 auto 1.5rem;">List your first product for free in under 2 minutes.</p>
+    <div class="sk-hero-cta" style="justify-content:center;">
+      <a href="/add-product/" class="btn-primary btn-lg">Sell Now — It's Free</a>
+      <a href="/products/" class="btn-secondary btn-lg">Browse Products</a>
+    </div>
+  </div>
+</section>
 
-</script>
-
-</body>
-</html>
-
+{% endblock %}

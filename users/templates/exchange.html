@@ -1,291 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Exchange Request - SwapKart</title>
+{% block title %}Exchange Request — SwapKart{% endblock %}
 
-    <style>
+{% block content %}
+<div class="sk-container">
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-    body{
-    font-family:Arial, sans-serif;
-    background:#f5f7f6;
-    color:#222;
-    margin:0;
-}
-
-        .container{
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-        h1{
-            text-align:center;
-            color:#1f8f5f;
-            margin-bottom:35px;
-            font-size:38px;
-        }
-
-       .product-box{
-    background:#f8f9fa;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:30px;
-}
-
-        .product-box h2{
-            color:#1f8f5f;
-            margin-bottom:10px;
-        }
-
-        label{
-            display:block;
-            margin-bottom:10px;
-            color:#1f8f5f;
-            font-weight:bold;
-        }
-
-        textarea,
-input,
-select{
-    width:100%;
-    padding:14px;
-    margin-bottom:25px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    background:white;
-    color:#333;
-    font-size:15px;
-}
-
-        textarea{
-            height:140px;
-            resize:none;
-        }
-
-        textarea:focus,
-        input:focus{
-            outline:none;
-            border:1px solid #1f8f5f;
-        }
-
-        .upload-box{
-            background:#f8f9fa;
-            border:2px dashed #1f8f5f;
-            padding:20px;
-            border-radius:15px;
-            text-align:center;
-            margin-bottom:25px;
-        }
-
-        .upload-box p{
-            color:#bbb;
-            margin-bottom:15px;
-        }
-
-        button{
-            width:100%;
-            padding:15px;
-            border:none;
-            border-radius:12px;
-            background:#1f8f5f;
-            color:white;
-            font-size:17px;
-            cursor:pointer;
-            transition:0.3s;
-        }
-
-        button:hover{
-            background:#18724c;
-            transform:translateY(-3px);
-        }
-      .navbar{
-    background:white;
-    padding:20px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-} 
-
-.logo{
-    color:#1f8f5f;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#444;
-    margin-left:20px;
-    font-weight:500;
-}
-
-.nav-links a:hover{
-    background:#e8f7ef;
-    color:#1f8f5f;
-}
-.navbar{
-    background:linear-gradient(
-        90deg,
-        #1f8f5f,
-        #111
-    );
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    box-shadow:0 3px 15px rgba(0,0,0,0.2);
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:8px;
-    white-space:nowrap;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    background:white;
-    color:#1f8f5f;
-    transform:translateY(-2px);
-}
-    </style>
-
-</head>
-
-<body>
-<div class="navbar">
-
-    <div class="logo">
-        ♻️ SwapKart
+  <div style="max-width:640px; margin:0 auto;">
+    
+    <!-- Page Header -->
+    <div class="sk-page-header" style="border-bottom:none; margin-bottom:1.5rem; text-align:center;">
+      <h1 class="sk-page-title">🔄 Send Exchange Proposal</h1>
+      <p class="sk-page-subtitle">Suggest a swap deal by offering one of your own products</p>
     </div>
 
-    <div class="nav-links">
-
-        <a href="/home/">🏠 Home</a>
-
-        <a href="/products/">🛍 Products</a>
-
-        <a href="/add-product/">➕ Add Product</a>
-
-        <a href="/cart/">🛒 Cart</a>
-
-        <a href="/my-orders/">📦 Orders</a>
-
-        <a href="/my-uploads/">📤 Uploads</a>
-
-        <a href="/exchange-requests/">📩 Exchanges</a>
-
-        <a href="/logout/">🚪 Logout</a>
-
+    <!-- Target Product Summary -->
+    <div style="background:var(--green-50); border:1px solid var(--green-100); border-radius:var(--radius-xl); padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; box-shadow:var(--shadow-sm); flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span style="font-size:0.75rem; color:var(--green-700); font-weight:700; text-transform:uppercase; letter-spacing:0.8px;">TARGET ITEM</span>
+        <h2 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); margin-top:0.15rem;">{{ product.title }}</h2>
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.1rem;">Category: {{ product.category }} • Listed by {{ product.user.username }}</div>
+      </div>
+      <div>
+        <div style="font-size:1.35rem; font-weight:900; color:var(--green-600);">₹{{ product.price }}</div>
+      </div>
     </div>
 
-</div>
-    <div class="container">
+    <!-- Form Card -->
+    <div style="background:var(--white); border:1.5px solid var(--gray-200); border-radius:var(--radius-2xl); padding:2.5rem 2rem; box-shadow:var(--shadow-md);">
+      
+      <form method="POST" enctype="multipart/form-data" id="exchange-form">
+        {% csrf_token %}
 
-        <h1>🔄 Exchange Request</h1>
-
-        <div class="product-box">
-
-            <h2>
-                {{ product.title }}
-            </h2>
-
-            <p>
-                ₹{{ product.price }}
-            </p>
-
-            <p>
-                📦 {{ product.category }}
-            </p>
-
+        <!-- Message -->
+        <div class="sk-form-group">
+          <label class="sk-label">Why do you want this exchange? *</label>
+          <textarea class="sk-textarea" name="message" placeholder="Explain what product you want to exchange and why it is useful for both users" required></textarea>
         </div>
 
-        <form method="POST"
-              enctype="multipart/form-data">
+        <!-- Offered Product -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product You Are Offering *</label>
+          <input class="sk-input" type="text" name="offered_product" placeholder="Example: Silver Necklace, Java Book, Mobile Phone" required/>
+        </div>
 
-            {% csrf_token %}
+        <!-- Condition + Contact -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <div class="sk-form-group" style="margin-bottom:0;">
+            <label class="sk-label">Product Condition</label>
+            <select class="sk-select" name="condition">
+              <option>Like New</option>
+              <option>Good</option>
+              <option>Used</option>
+            </select>
+          </div>
+          <div class="sk-form-group" style="margin-bottom:0;">
+            <label class="sk-label">Your Contact Number *</label>
+            <input class="sk-input" type="tel" name="phone" placeholder="Enter contact number" maxlength="10" required/>
+          </div>
+        </div>
 
-            <label>
-                Why do you want this exchange?
-            </label>
-
-            <textarea
-                name="message"
-                placeholder="Explain what product you want to exchange and why it is useful for both users">
-            </textarea>
-            <select name="condition">
-
-    <option>Like New</option>
-
-    <option>Good</option>
-
-    <option>Used</option>
-
-</select>
-            <label>
-                Your Contact Number
-            </label>
-
-            <input type="text"
-                   name="phone"
-                   placeholder="Enter contact number">
+        <!-- Image Upload Zone -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product Image *</label>
+          <div class="sk-upload-zone" id="dropzone" onclick="document.getElementById('exchange-image-file').click()" style="box-shadow:var(--shadow-sm);">
+            <div style="font-size:2.25rem; margin-bottom:0.5rem;">📸</div>
+            <p class="upload-text" id="upload-instruction" style="font-weight:600; color:var(--text-secondary);">Click to upload your product photo</p>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">PNG, JPG, JPEG are supported</p>
             
-                   <label>
-    Product You Are Offering
-</label>
+            <input type="file" id="exchange-image-file" name="exchange_image" accept="image/*" required style="display:none;"/>
+            <p id="file-name-display" style="color:var(--green-600); font-weight:700; margin-top:0.75rem; font-size:0.85rem;"></p>
+          </div>
+        </div>
 
-<input
-    type="text"
-    name="offered_product"
-    placeholder="Example: Silver Necklace, Java Book, Mobile Phone">
-            <div class="upload-box">
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary btn-full btn-lg" id="submitBtn" style="font-size:1rem; margin-top:1rem;">
+          🔄 Send Exchange Request
+        </button>
 
-                <p>
-                    📸 Upload your exchange product image
-                </p>
-
-                <input type="file"
-                       name="exchange_image">
-
-            </div>
-
-            <button type="submit">
-
-                🔄 Send Exchange Request
-
-            </button>
-
-        </form>
+      </form>
 
     </div>
 
-</body>
-</html>
+  </div>
 
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('exchange-image-file').addEventListener('change', function() {
+  const display = document.getElementById('file-name-display');
+  const instruction = document.getElementById('upload-instruction');
+  if(this.files && this.files.length > 0) {
+    display.textContent = "Selected: " + this.files[0].name;
+    instruction.textContent = "Photo selected successfully";
+  } else {
+    display.textContent = "";
+    instruction.textContent = "Click to upload your product photo";
+  }
+});
+document.getElementById('exchange-form').addEventListener('submit', function() {
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending Proposal…';
+  btn.disabled = true;
+});
+</script>
+{% endblock %}

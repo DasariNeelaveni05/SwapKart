@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile — SwapKart{% endblock %}
+
+{% block content %}
+<div class="sk-container" style="max-width:720px;">
+  <div class="sk-page-header text-center" style="border-bottom:none;">
+    <h1 class="sk-page-title">My Profile</h1>
+    <p class="sk-page-subtitle">Manage your account and marketplace activity</p>
+  </div>
+
+  <div class="sk-profile-card mb-3">
+    <div class="sk-profile-avatar">{{ user.username|slice:":1"|upper }}</div>
+    <h2 style="font-size:1.5rem;font-weight:800;">{{ user.username }}</h2>
+    <p class="text-muted" style="margin:0.35rem 0 1.25rem;">{{ user.email }}</p>
+    <span class="sk-hero-badge" style="margin-bottom:0;">Member since {{ user.date_joined|date:"d M Y" }}</span>
+  </div>
+
+  <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:1rem;">Activity Summary</h3>
+  <div class="grid-2 mb-4">
+    <a href="/my-orders/" class="sk-benefit-item" style="text-decoration:none;">
+      <div class="sk-benefit-icon">📦</div>
+      <div><h4>My Orders</h4><p class="text-sm text-muted">View order history and delivery status</p></div>
+    </a>
+    <a href="/my-uploads/" class="sk-benefit-item" style="text-decoration:none;">
+      <div class="sk-benefit-icon">📤</div>
+      <div><h4>My Uploads</h4><p class="text-sm text-muted">Manage your active listings</p></div>
+    </a>
+  </div>
+
+  <div class="sk-benefit-item" style="justify-content:space-between;flex-wrap:wrap;">
+    <div style="display:flex;gap:0.75rem;align-items:center;">
+      <div class="sk-benefit-icon">🔄</div>
+      <div>
+        <h4>Exchange Requests</h4>
+        <p class="text-sm text-muted">Check received or sent exchange proposals</p>
+      </div>
+    </div>
+    <a href="/exchange-requests/" class="btn-secondary btn-sm">Manage Exchanges</a>
+  </div>
+</div>
+{% endblock %}

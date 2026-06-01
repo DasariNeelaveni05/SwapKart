@@ -1,306 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Product - SwapKart</title>
+{% block title %}Add Product — SwapKart{% endblock %}
 
-    <style>
+{% block content %}
+<div class="sk-container">
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-            font-family:Arial, sans-serif;
-            background:#f5f7f6;
-            color:#222;
-            padding:40px;
-        }
-
-        .container{
-    width:90%;
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-        h1{
-            text-align:center;
-            margin-bottom:35px;
-            color:#1f8f5f;
-            font-size:38px;
-        }
-
-        label{
-            display:block;
-            margin-bottom:10px;
-            color:#1f8f5f;
-            font-weight:bold;
-            font-size:15px;
-        }
-
-       input,
-textarea,
-select{
-    width:100%;
-    padding:14px;
-    margin-top:8px;
-    margin-bottom:20px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
-}
-
-        input:focus,
-        textarea:focus,
-        select:focus{
-            outline:none;
-            border:1px solid #1f8f5f;
-            transform:scale(1.01);
-        }
-
-        textarea{
-            height:130px;
-            resize:none;
-        }
-
-        .upload-box{
-            background:#2a2a2a;
-            padding:20px;
-            border-radius:15px;
-            margin-bottom:25px;
-            text-align:center;
-            border:2px dashed #1f8f5f;
-        }
-
-        .upload-text{
-            color:#bbb;
-            margin-bottom:15px;
-        }
-
-        .custom-upload{
-            display:block;
-            background:#1f8f5f;
-            color:white;
-            padding:15px;
-            border-radius:12px;
-            text-align:center;
-            cursor:pointer;
-            transition:0.3s;
-        }
-
-        .custom-upload:hover{
-            background:#18724c;
-            transform:translateY(-3px);
-        }
-
-        button{
-    width:100%;
-    background:#1f8f5f;
-    color:white;
-    border:none;
-    padding:15px;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-
-        button:hover{
-            background:#18724c;
-            transform:translateY(-3px);
-        }
-        
-
-.navbar{
-    background:linear-gradient(
-        90deg,
-        #1f8f5f,
-        #111
-    );
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    box-shadow:0 3px 15px rgba(0,0,0,0.2);
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:8px;
-    white-space:nowrap;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    background:white;
-    color:#1f8f5f;
-    transform:translateY(-2px);
-}
-.success-message{
-    background:#d4edda;
-    color:#155724;
-    padding:15px;
-    margin-bottom:20px;
-    border-radius:10px;
-    text-align:center;
-    font-weight:bold;
-    border:1px solid #c3e6cb;
-}
-
-    </style>
-
-</head>
-
-<body>
-
-<div class="navbar">
-
-    <div class="logo">
-        ♻️ SwapKart
+  <div style="max-width:640px; margin:0 auto;">
+    
+    <!-- Page Header -->
+    <div class="sk-page-header" style="border-bottom:none; margin-bottom:1.5rem; text-align:center;">
+      <h1 class="sk-page-title">🛍 Sell Product</h1>
+      <p class="sk-page-subtitle">List your unused items for sale or trade in our marketplace</p>
     </div>
 
-    <div class="nav-links">
+    <!-- Alert Messages -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="sk-toast success" style="margin-bottom:1.5rem;animation:none;position:relative;max-width:100%;">
+          <span class="sk-toast-icon">✅</span>
+          <span class="sk-toast-text">{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
 
-        <a href="/home/">🏠 Home</a>
-        <a href="/products/">🛍 Products</a>
-        <a href="/cart/">🛒 Cart</a>
-        <a href="/my-orders/">📦 Orders</a>
-        <a href="/my-uploads/">📤 Uploads</a>
-        <a href="/exchange-requests/">📩 Exchanges</a>
-        <a href="/logout/">🚪 Logout</a>
+    <!-- Form Card -->
+    <div style="background:var(--white); border:1.5px solid var(--gray-200); border-radius:var(--radius-2xl); padding:2.5rem 2rem; box-shadow:var(--shadow-md);">
+      
+      <form method="POST" enctype="multipart/form-data" id="add-product-form">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product Title *</label>
+          <input class="sk-input" type="text" name="title" placeholder="Enter product name" required/>
+        </div>
+
+        <!-- Description -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product Description *</label>
+          <textarea class="sk-textarea" name="description" placeholder="Describe product condition, usage, warranty and important details" required></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product Price (₹) *</label>
+          <input class="sk-input" type="number" name="price" placeholder="Enter price in INR" min="0" required/>
+        </div>
+
+        <!-- Category + Exchange -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <div class="sk-form-group" style="margin-bottom:0;">
+            <label class="sk-label">Select Category</label>
+            <select class="sk-select" name="category">
+              <option>Books</option>
+              <option>Gadgets</option>
+              <option>Furniture</option>
+              <option>Cycles</option>
+              <option>Mobiles</option>
+              <option>others</option>
+            </select>
+          </div>
+          <div class="sk-form-group" style="margin-bottom:0;">
+            <label class="sk-label">Exchange Available?</label>
+            <select class="sk-select" name="exchange">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Image Upload Zone -->
+        <div class="sk-form-group">
+          <label class="sk-label">Product Image *</label>
+          <div class="sk-upload-zone" id="dropzone" onclick="document.getElementById('product-image-file').click()" style="box-shadow:var(--shadow-sm);">
+            <div style="font-size:2.25rem; margin-bottom:0.5rem;">📸</div>
+            <p class="upload-text" id="upload-instruction" style="font-weight:600; color:var(--text-secondary);">Click to upload clear product photo</p>
+            <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">PNG, JPG, JPEG are supported</p>
+            
+            <input type="file" id="product-image-file" name="image" accept="image/*" required style="display:none;"/>
+            <p id="file-name-display" style="color:var(--green-600); font-weight:700; margin-top:0.75rem; font-size:0.85rem;"></p>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary btn-full btn-lg" id="submitBtn" style="font-size:1rem; margin-top:1rem;">
+          ➕ Add Product Listing
+        </button>
+
+      </form>
 
     </div>
+
+  </div>
 
 </div>
+{% endblock %}
 
-<!-- Rest of your page content starts here -->
-
-    <div class="container">
-
-        <h1>🛍 Add Product</h1>
-        {% if messages %}
-    {% for message in messages %}
-        <div class="success-message">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-        <form method="POST" enctype="multipart/form-data">
-
-            {% csrf_token %}
-
-            <label>
-                Product Title
-            </label>
-
-            <input type="text"
-                   name="title"
-                   placeholder="Enter product name">
-
-            <label>
-                Product Description
-            </label>
-
-            <textarea
-                name="description"
-                placeholder="Describe product condition, usage, warranty and important details">
-            </textarea>
-
-            <label>
-                Product Price
-            </label>
-
-            <input type="number"
-                   name="price"
-                   placeholder="Enter price">
-
-            <label>
-                Select Category
-            </label>
-
-            <select name="category">
-
-                <option>Books</option>
-                <option>Gadgets</option>
-                <option>Furniture</option>
-                <option>Cycles</option>
-                <option>Mobiles</option>
-                <option>others</option>
-
-            </select>
-
-            <label>
-                Exchange Available?
-            </label>
-
-            <select name="exchange">
-
-                <option>Yes</option>
-                <option>No</option>
-
-            </select>
-
-            <div class="upload-box">
-
-                <p class="upload-text">
-                    📸 Upload clear product image
-                </p>
-
-                <label class="custom-upload">
-                    Choose Image
-                    <input type="file"
-                           id="product-image-file"
-                           name="image"
-                           accept="image/*"
-                           hidden>
-                </label>
-                
-                <p id="file-name-display" style="color:#2ecc71; font-weight:bold; margin-top:10px; font-size:14px;"></p>
-
-            </div>
-
-            <button type="submit">
-
-                ➕ Add Product
-
-            </button>
-
-        </form>
-
-    </div>
-
-    <script>
-        document.getElementById('product-image-file').addEventListener('change', function() {
-            if(this.files && this.files.length > 0) {
-                document.getElementById('file-name-display').innerText = "Selected: " + this.files[0].name;
-            } else {
-                document.getElementById('file-name-display').innerText = "";
-            }
-        });
-    </script>
-
-</body>
-</html>
-
+{% block extra_js %}
+<script>
+document.getElementById('product-image-file').addEventListener('change', function() {
+  const display = document.getElementById('file-name-display');
+  const instruction = document.getElementById('upload-instruction');
+  if(this.files && this.files.length > 0) {
+    display.textContent = "Selected: " + this.files[0].name;
+    instruction.textContent = "Photo selected successfully";
+  } else {
+    display.textContent = "";
+    instruction.textContent = "Click to upload clear product photo";
+  }
+});
+document.getElementById('add-product-form').addEventListener('submit', function() {
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Creating listing…';
+  btn.disabled = true;
+});
+</script>
+{% endblock %}

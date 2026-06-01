@@ -1,237 +1,240 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Exchange Center - SwapKart</title>
+{% extends 'base.html' %}
+{% load static %}
 
-    <style>
+{% block title %}Exchange Center — SwapKart{% endblock %}
+{% block extra_head %}
+<style>
+    .ex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem;
+    }
+    .ex-section {
+      margin-bottom: 3.5rem;
+    }
+    .ex-section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1.5px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+{% endblock %}
 
-        body{
-            font-family:Arial,sans-serif;
-            background:#f5f7f6;
-            padding:40px;
-        }
+{% block content %}
+<div class="sk-container">
+  
+  <div class="sk-page-header">
+    <h1 class="sk-page-title">🔄 Exchange Center</h1>
+    <p class="sk-page-subtitle">Manage received swap proposals and track your sent requests</p>
+  </div>
 
-        h1{
-            text-align:center;
-            color:#1f8f5f;
-            margin-bottom:40px;
-        }
-
-        h2{
-            color:#1f8f5f;
-            margin-bottom:20px;
-        }
-
-        .section{
-            margin-bottom:50px;
-        }
-
-        .card{
-            background:white;
-            padding:20px;
-            margin-bottom:20px;
-            border-radius:15px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.08);
-        }
-        .navbar{
-    background:linear-gradient(
-        90deg,
-        #1f8f5f,
-        #111
-    );
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    box-shadow:0 3px 15px rgba(0,0,0,0.2);
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.nav-links{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:8px;
-    white-space:nowrap;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    background:white;
-    color:#1f8f5f;
-    transform:translateY(-2px);
-}
-
-    </style>
-</head>
-
-<body>
-<div class="navbar">
-
-    <div class="logo">
-        ♻️ SwapKart
+  <!-- ── 1. RECEIVED PROPOSALS (PENDING) ── -->
+  <div class="ex-section">
+    <div class="ex-section-title">
+      <span>📩</span> Received Proposals (Pending)
     </div>
+    
+    <div class="ex-grid">
+      {% for req in received_requests %}
+        {% if req.status != 'Accepted' and req.status != 'Rejected' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);display:flex;flex-direction:column;gap:0.75rem;border-radius:var(--radius-xl);padding:1.25rem;">
+            <div>
+              <div style="font-size:0.72rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;">PRODUCT REQUESTED</div>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;">{{ req.product.title }}</div>
+            </div>
+            
+            <div style="background:var(--gray-50);border-radius:var(--radius-md);padding:0.75rem;border:1px solid var(--gray-200);font-size:0.82rem;">
+              <div>👤 <strong>Requester:</strong> {{ req.requester.username }}</div>
+              <div>📞 <strong>Contact:</strong> {{ req.phone }}</div>
+              <div style="margin-top:0.25rem;">🎁 <strong>Offered Item:</strong> <span style="font-weight:600;color:var(--green-600);">{{ req.offered_product }}</span></div>
+              <div>⭐ <strong>Condition:</strong> <span class="badge badge-success" style="font-size:0.6rem;padding:0.1rem 0.4rem;">{{ req.condition }}</span></div>
+            </div>
 
-    <div class="nav-links">
-
-        <a href="/home/">🏠 Home</a>
-
-        <a href="/products/">🛍 Products</a>
-
-        <a href="/add-product/">➕ Add Product</a>
-
-        <a href="/cart/">🛒 Cart</a>
-
-        <a href="/my-orders/">📦 Orders</a>
-
-        <a href="/my-uploads/">📤 Uploads</a>
-
-        <a href="/logout/">🚪 Logout</a>
-
-    </div>
-
-</div>
-<h1>🔄 Exchange Center</h1>
-
-<div class="section">
-
-    <h2>📩 Received Requests</h2>
-
-    {% for req in received_requests %}
-
-    <div class="card">
-
-        <p><b>Product Wanted:</b> {{ req.product.title }}</p>
-
-<p><b>Requested By:</b> {{ req.requester.username }}</p>
-
-<p><b>Phone Number:</b> {{ req.phone }}</p>
-
-<p><b>Offered Product:</b> {{ req.offered_product }}</p>
-
-<p><b>Condition:</b> {{ req.condition }}</p>
-
-<p><b>Message:</b> {{ req.message }}</p>
-
-{% if req.exchange_image %}
-    <img src="{{ req.exchange_image.url }}"
-         style="width:250px;border-radius:12px;margin-top:10px;display:block;margin-bottom:10px;">
-{% else %}
-    <p style="color:gray; font-style:italic; margin-top:10px; margin-bottom:10px;">No image uploaded</p>
-{% endif %}
-
-<p style="margin-bottom: 15px;"><b>Status:</b> {{ req.status }}</p>
-
-<a href="/accept-exchange/{{ req.id }}/"
-   style="
-   background:green;
-   color:white;
-   padding:10px;
-   border-radius:8px;
-   text-decoration:none;
-   margin-right:10px;">
-
-   ✅ Accept
-
-</a>
-
-<a href="/reject-exchange/{{ req.id }}/"
-   style="
-   background:red;
-   color:white;
-   padding:10px;
-   border-radius:8px;
-   text-decoration:none;">
-
-   ❌ Reject
-
-</a>
-
-    </div>
-
-    {% empty %}
-
-    <p>No received requests.</p>
-
-    {% endfor %}
-
-</div>
-
-<div class="section">
-
-    <h2>📤 Sent Requests</h2>
-
-    {% for req in sent_requests %}
-
-    <div class="card">
-
-        <p><b>Product:</b> {{ req.product.title }}</p>
-
-        <p><b>Owner:</b> {{ req.product.user.username }}</p>
-
-        <p><b>Your Message:</b> {{ req.message }}</p>
-
-        <p>
-
-            <b>Status:</b>
-
-            {% if req.status == "Accepted" %}
-
-                <span style="color:green;font-weight:bold;">
-                    ✅ Your request has been accepted
-                </span>
-
-            {% elif req.status == "Rejected" %}
-
-                <span style="color:red;font-weight:bold;">
-                    ❌ Your request has been rejected
-                </span>
-
+            {% if req.exchange_image %}
+              <div style="border-radius:var(--radius-md);overflow:hidden;height:140px;background:var(--gray-100);">
+                <img src="{{ req.exchange_image.url }}" alt="Offered product image" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
             {% else %}
-
-                <span style="color:orange;font-weight:bold;">
-                    ⏳ Waiting for response
-                </span>
-
+              <div style="height:100px;display:flex;align-items:center;justify-content:center;background:var(--gray-50);border:1px dashed var(--gray-300);border-radius:var(--radius-md);font-size:0.75rem;color:var(--text-muted);font-style:italic;">
+                No product image uploaded
+              </div>
             {% endif %}
 
-        </p>
+            <div style="font-size:0.8rem;color:var(--text-secondary);line-height:1.45;background:var(--green-50);padding:0.6rem 0.75rem;border-radius:var(--radius-md);border-left:3px solid var(--green-500);">
+              💬 "<em>{{ req.message }}</em>"
+            </div>
 
-        <a href="/delete-exchange-request/{{ req.id }}/"
-           style="
-           background:red;
-           color:white;
-           padding:10px 15px;
-           border-radius:8px;
-           text-decoration:none;
-           display:inline-block;
-           margin-top:10px;">
+            <div class="sk-ex-actions">
+              <a href="/accept-exchange/{{ req.id }}/" class="btn-primary btn-sm">Accept</a>
+              <a href="/reject-exchange/{{ req.id }}/" class="btn-danger btn-sm">Reject</a>
+            </div>
+          </div>
+        {% endif %}
+      {% empty %}
+        <p style="grid-column:1/-1;color:var(--text-muted);font-size:0.9rem;text-align:center;padding:2rem;background:var(--white);border-radius:var(--radius-md);border:1px dashed var(--gray-300);">No received proposals found.</p>
+      {% endfor %}
+    </div>
+  </div>
 
-           🗑 Delete Request
-
-        </a>
-
+  <!-- ── 2. SENT PROPOSALS (PENDING) ── -->
+  <div class="ex-section">
+    <div class="ex-section-title">
+      <span>📤</span> Sent Proposals (Pending)
     </div>
 
-    {% empty %}
+    <div class="ex-grid">
+      {% for req in sent_requests %}
+        {% if req.status != 'Accepted' and req.status != 'Rejected' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);display:flex;flex-direction:column;gap:0.75rem;border-radius:var(--radius-xl);padding:1.25rem;">
+            <div>
+              <div style="font-size:0.72rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;">PRODUCT WANTED</div>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;">{{ req.product.title }}</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">Owner: {{ req.product.user.username }}</div>
+            </div>
 
-    <p>No sent requests.</p>
+            <div style="background:var(--gray-50);border-radius:var(--radius-md);padding:0.75rem;border:1px solid var(--gray-200);font-size:0.82rem;">
+              <div>🎁 <strong>Your Offer:</strong> <span style="font-weight:600;color:var(--green-600);">{{ req.offered_product }}</span></div>
+              <div>⭐ <strong>Condition:</strong> <span class="badge badge-success" style="font-size:0.6rem;padding:0.1rem 0.4rem;">{{ req.condition }}</span></div>
+            </div>
 
-    {% endfor %}
+            {% if req.exchange_image %}
+              <div style="border-radius:var(--radius-md);overflow:hidden;height:120px;background:var(--gray-100);">
+                <img src="{{ req.exchange_image.url }}" alt="Offered product image" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+            {% endif %}
+
+            <div style="font-size:0.8rem;color:var(--text-secondary);line-height:1.45;background:var(--gray-50);padding:0.6rem;border-radius:var(--radius-md);">
+              💬 "<em>{{ req.message }}</em>"
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge badge-pending">⏳ Waiting for Response</span>
+              <a href="/delete-exchange-request/{{ req.id }}/" class="btn-ghost btn-sm" onclick="return confirm('Cancel this exchange request?')" style="border-color:var(--danger);color:var(--danger);">✕ Cancel</a>
+            </div>
+          </div>
+        {% endif %}
+      {% empty %}
+        <p style="grid-column:1/-1;color:var(--text-muted);font-size:0.9rem;text-align:center;padding:2rem;background:var(--white);border-radius:var(--radius-md);border:1px dashed var(--gray-300);">No sent proposals found.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ── 3. ACCEPTED EXCHANGES ── -->
+  <div class="ex-section">
+    <div class="ex-section-title">
+      <span>✅</span> Accepted Swaps
+    </div>
+
+    <div class="ex-grid">
+      {% for req in received_requests %}
+        {% if req.status == 'Accepted' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--green-200);display:flex;flex-direction:column;gap:0.75rem;border-radius:var(--radius-xl);padding:1.25rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <span class="badge badge-success">✓ Received Proposal</span>
+                <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;margin-top:0.4rem;">{{ req.product.title }}</div>
+              </div>
+            </div>
+
+            <div style="background:var(--green-50);border-radius:var(--radius-md);padding:0.75rem;border:1px solid var(--green-100);font-size:0.82rem;color:var(--green-700);">
+              <div>👤 <strong>Swapped with:</strong> {{ req.requester.username }}</div>
+              <div>📞 <strong>Contact:</strong> {{ req.phone }}</div>
+              <div>🎁 <strong>Acquired Item:</strong> <span style="font-weight:700;">{{ req.offered_product }}</span></div>
+            </div>
+
+            {% if req.exchange_image %}
+              <div style="border-radius:var(--radius-md);overflow:hidden;height:120px;background:var(--gray-100);">
+                <img src="{{ req.exchange_image.url }}" alt="Offered product image" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+            {% endif %}
+            
+            <div style="font-size:0.75rem;color:var(--success);font-weight:700;text-align:center;padding:0.5rem;background:var(--green-50);border-radius:var(--radius-md);">
+              🎉 Swap completed! Coordinate delivery.
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% for req in sent_requests %}
+        {% if req.status == 'Accepted' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--green-200);display:flex;flex-direction:column;gap:0.75rem;border-radius:var(--radius-xl);padding:1.25rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <span class="badge badge-success">✓ Sent Proposal</span>
+                <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;margin-top:0.4rem;">{{ req.product.title }}</div>
+              </div>
+            </div>
+
+            <div style="background:var(--green-50);border-radius:var(--radius-md);padding:0.75rem;border:1px solid var(--green-100);font-size:0.82rem;color:var(--green-700);">
+              <div>👤 <strong>Swapped with:</strong> {{ req.product.user.username }}</div>
+              <div>🎁 <strong>Your Offer:</strong> <span style="font-weight:700;">{{ req.offered_product }}</span></div>
+            </div>
+
+            {% if req.exchange_image %}
+              <div style="border-radius:var(--radius-md);overflow:hidden;height:120px;background:var(--gray-100);">
+                <img src="{{ req.exchange_image.url }}" alt="Offered product image" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+            {% endif %}
+
+            <div style="font-size:0.75rem;color:var(--success);font-weight:700;text-align:center;padding:0.5rem;background:var(--green-50);border-radius:var(--radius-md);">
+              🎉 Swap accepted! Connect with the owner.
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ── 4. REJECTED EXCHANGES ── -->
+  <div class="ex-section">
+    <div class="ex-section-title">
+      <span>❌</span> Rejected Proposals
+    </div>
+
+    <div class="ex-grid">
+      {% for req in received_requests %}
+        {% if req.status == 'Rejected' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);display:flex;flex-direction:column;gap:0.5rem;border-radius:var(--radius-xl);padding:1.25rem;opacity:0.75;">
+            <div>
+              <span class="badge badge-cancelled">❌ Received Proposal</span>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;margin-top:0.4rem;">{{ req.product.title }}</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">Requester: {{ req.requester.username }}</div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--text-secondary);">
+              Offered: {{ req.offered_product }}
+            </div>
+            <div style="font-size:0.75rem;color:var(--text-muted);font-style:italic;margin-top:0.25rem;">
+              You declined this request.
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% for req in sent_requests %}
+        {% if req.status == 'Rejected' %}
+          <div class="sk-exchange-card" style="background:var(--white);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);display:flex;flex-direction:column;gap:0.5rem;border-radius:var(--radius-xl);padding:1.25rem;opacity:0.75;">
+            <div>
+              <span class="badge badge-cancelled">❌ Sent Proposal</span>
+              <div style="font-weight:700;color:var(--text-primary);font-size:0.95rem;margin-top:0.4rem;">{{ req.product.title }}</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);">Owner: {{ req.product.user.username }}</div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--text-secondary);">
+              Your offer: {{ req.offered_product }}
+            </div>
+            <div style="font-size:0.75rem;color:var(--text-muted);font-style:italic;margin-top:0.25rem;">
+              This proposal was declined.
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
 </div>
-
-</body>
-</html>
+{% endblock %}
