@@ -9,9 +9,6 @@
 
 {% block content %}
 <div class="sk-auth-container">
-  {% include 'auth_brand_panel.html' %}
-
-  <div class="sk-auth-form-side">
     <div class="sk-auth-card">
       <div class="sk-auth-logo">
         <a href="/"><div class="logo-text">♻ SwapKart</div></a>
@@ -80,12 +77,6 @@
         <button type="submit" class="btn-primary btn-full btn-lg" id="signupBtn">Create Account</button>
       </form>
 
-      <div class="sk-auth-highlights">
-        <div><span>🛍</span><small>Buy &amp; Sell</small></div>
-        <div><span>🔄</span><small>Exchange</small></div>
-        <div><span>🔒</span><small>Secure</small></div>
-      </div>
-
       <div class="sk-auth-divider"><span>or</span></div>
 
       <p class="sk-auth-footer-text">
@@ -94,7 +85,6 @@
       </p>
       <p class="sk-auth-back"><a href="/">← Back to Home</a></p>
     </div>
-  </div>
 </div>
 {% endblock %}
 
