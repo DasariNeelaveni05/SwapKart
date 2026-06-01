@@ -26,11 +26,13 @@
     {% for product in products %}
     <div class="sk-product-card" style="box-shadow:var(--shadow-sm);">
       <div class="card-img-wrap">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.title }}"/>
-        {% else %}
-          <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&auto=format&fit=crop" alt="Product Image"/>
-        {% endif %}
+        <a href="/product/{{ product.id }}/" class="card-img-link" aria-label="View {{ product.title }}">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}"/>
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&auto=format&fit=crop" alt="Product Image"/>
+          {% endif %}
+        </a>
         
         {% if product.exchange %}
           <span class="card-badge">🔄 Exchange</span>
